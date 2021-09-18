@@ -1,48 +1,109 @@
+import styled from "@emotion/styled";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import React from "react";
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+import ArticleList from "components/article/ArticleList";
+import Banner from "components/home/Banner";
+import Tags from "components/home/Tags";
+import TabList from "components/home/TabList";
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+const IndexPageContainer = styled("div")``;
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+const IndexPagePresenter = styled("div")`
+  margin: 1.5rem auto 0;
+  padding: 0 15px;
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+  @media (min-width: 544px) {
+    max-width: 576px;
+  }
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
 
-          <a href="" className={styles.card}>
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+  @media (min-width: 992px) {
+    max-width: 940px;
+  }
 
-          <a href="" className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with 4everland.
-            </p>
-          </a>
-        </div>
-      </main>
-    </div>
-  );
-}
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+`;
+
+const MainContent = styled("div")`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+`;
+
+const ContentContainer = styled("div")`
+  width: 100%;
+  @media (min-width: 768px) {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+`;
+
+const FeedToggle = styled("div")`
+  margin-bottom: -1px;
+`;
+
+const SidebarContainer = styled("div")`
+  @media (min-width: 768px) {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+`;
+
+const SidebarPresenter = styled("div")`
+  padding: 5px 10px 10px;
+  background: #f3f3f3;
+  border-radius: 4px;
+`;
+
+const SidebarTitle = styled("p")`
+  margin-top: 0;
+  margin-bottom: 0.2rem;
+`;
+
+const IndexPage = () => (
+  <>
+    <Head>
+      <title>HOME | NEXT REALWORLD</title>
+      <meta
+        name="description"
+        content="Next.js + SWR codebase containing realworld examples (CRUD, auth, advanced patterns, etc) that adheres to the realworld spec and API"
+      />
+    </Head>
+    <IndexPageContainer className="home-page">
+      <Banner />
+      <IndexPagePresenter>
+        <MainContent>
+          <ContentContainer>
+            <FeedToggle>
+              <TabList />
+            </FeedToggle>
+            <ArticleList />
+          </ContentContainer>
+          <SidebarContainer>
+            <SidebarPresenter>
+              <SidebarTitle>Popular Tags</SidebarTitle>
+              <Tags />
+            </SidebarPresenter>
+          </SidebarContainer>
+        </MainContent>
+      </IndexPagePresenter>
+    </IndexPageContainer>
+  </>
+);
+
+export default IndexPage;
